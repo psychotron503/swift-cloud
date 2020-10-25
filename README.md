@@ -58,23 +58,22 @@ can be included. This provides a MongoDB query style to the API.
 The albums and songs can be sorted:
 
 * To sort all songs by year ascending (ascending is default sort order):
- - /catalog/v1/songs?sort=year
+  - /catalog/v1/songs?sort=year
 
 * To sort all songs by year descending:
- - /catalog/v1/songs?sort=year:desc
+  - /catalog/v1/songs?sort=year:desc
 
 * To sort all songs written between 2015 and 2018 by year in descending order:
- - /catalog/v1/albums?q={"year": {"$bt": [2015, 2018]}}&sort=year:desc
+  - /catalog/v1/albums?q={"year": {"$bt": [2015, 2018]}}&sort=year:desc
 
 The albums and songs can have a limit on results to return:
 
 * To get the top 3 songs played in July:
- - /catalog/v1/songs?sort=plays_july:desc&limit=3
+  - /catalog/v1/songs?sort=plays_july:desc&limit=3
 
 * To get Taylor Swift's first 5 albums:.
- - /catalog/v1/albums?sort=year&limit=5
+  - /catalog/v1/albums?sort=year&limit=5
  
-
 # Improvements or Next Steps
 
   * Update root catalog endpoint to retrieve data from all endpoints e.g.:
@@ -118,42 +117,42 @@ The albums and songs can have a limit on results to return:
 # Full Test URLs
 
 ## Retrieve data specific to albums
-http://localhost:5000/catalog/v1/albums
-http://localhost:5000/catalog/v1/albums/Bigger
-http://localhost:5000/catalog/v1/albums?q={"year": {"$eq": 2019}}
-http://localhost:5000/catalog/v1/albums?q={"year": {"$lt": 2019}}
-http://localhost:5000/catalog/v1/albums?q={"year": {"$gt": 2019}}
-http://localhost:5000/catalog/v1/albums?q={"year": {"$lte": 2019}}
-http://localhost:5000/catalog/v1/albums?q={"year": {"$gte": 2019}}
-http://localhost:5000/catalog/v1/albums?q={"year": {"$bt": [2018, 2020]}}
-http://localhost:5000/catalog/v1/albums?sort=year
-http://localhost:5000/catalog/v1/albums?sort=year:desc
-http://localhost:5000/catalog/v1/albums?sort=year:desc&limit=3
-http://localhost:5000/catalog/v1/albums?q={"year": {"$bt": [2018, 2020]}}&sort=year&limit=4
+* http://localhost:5000/catalog/v1/albums
+* http://localhost:5000/catalog/v1/albums/Bigger
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$eq": 2019}}
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$lt": 2019}}
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$gt": 2019}}
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$lte": 2019}}
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$gte": 2019}}
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$bt": [2018, 2020]}}
+* http://localhost:5000/catalog/v1/albums?sort=year
+* http://localhost:5000/catalog/v1/albums?sort=year:desc
+* http://localhost:5000/catalog/v1/albums?sort=year:desc&limit=3
+* http://localhost:5000/catalog/v1/albums?q={"year": {"$bt": [2018, 2020]}}&sort=year&limit=4
 
 ## Retrieve data specific to songs
-http://localhost:5000/catalog/v1/songs
-http://localhost:5000/catalog/v1/songs/Babe
-http://localhost:5000/catalog/v1/songs?q={"year": {"$eq": 2019}}
-http://localhost:5000/catalog/v1/songs?q={"year": {"$lt": 2019}}
-http://localhost:5000/catalog/v1/songs?q={"year": {"$gt": 2019}}
-http://localhost:5000/catalog/v1/songs?q={"year": {"$lte": 2019}}
-http://localhost:5000/catalog/v1/songs?q={"year": {"$gte": 2019}}
-http://localhost:5000/catalog/v1/songs?q={"year": {"$bt": [2018, 2020]}}
-http://localhost:5000/catalog/v1/songs?q={"plays_june": {"$eq": 19}}
-http://localhost:5000/catalog/v1/songs?q={"plays_june": {"$lt": 10}}
-http://localhost:5000/catalog/v1/songs?q={"plays_july": {"$gt": 100}}
-http://localhost:5000/catalog/v1/songs?q={"plays_july": {"$lte": 22}}
-http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$gte": 101}}
-http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 102]}}
-http://localhost:5000/catalog/v1/songs?sort=year
-http://localhost:5000/catalog/v1/songs?sort=year:desc
-http://localhost:5000/catalog/v1/songs?sort=year:desc&limit=3
-http://localhost:5000/catalog/v1/songs?q={"year": {"$bt": [2018, 2020]}}&sort=year&limit=4
-http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 106]}}&sort=plays_august
-http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 102]}}&sort=plays_august:desc
+* http://localhost:5000/catalog/v1/songs
+* http://localhost:5000/catalog/v1/songs/Babe
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$eq": 2019}}
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$lt": 2019}}
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$gt": 2019}}
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$lte": 2019}}
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$gte": 2019}}
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$bt": [2018, 2020]}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_june": {"$eq": 19}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_june": {"$lt": 10}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_july": {"$gt": 100}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_july": {"$lte": 22}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$gte": 101}}
+* http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 102]}}
+* http://localhost:5000/catalog/v1/songs?sort=year
+* http://localhost:5000/catalog/v1/songs?sort=year:desc
+* http://localhost:5000/catalog/v1/songs?sort=year:desc&limit=3
+* http://localhost:5000/catalog/v1/songs?q={"year": {"$bt": [2018, 2020]}}&sort=year&limit=4
+* http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 106]}}&sort=plays_august
+* http://localhost:5000/catalog/v1/songs?q={"plays_august": {"$bt": [101, 102]}}&sort=plays_august:desc
 
 ## Retrieve data specific to artists
-http://localhost:5000/catalog/v1/artists
-http://localhost:5000/catalog/v1/artists/Sugarland
-http://localhost:5000/catalog/v1/artists?limit=3
+* http://localhost:5000/catalog/v1/artists
+* http://localhost:5000/catalog/v1/artists/Sugarland
+* http://localhost:5000/catalog/v1/artists?limit=3
