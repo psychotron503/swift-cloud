@@ -4,7 +4,7 @@
   "description": "This application exposes a REST API to retrieve Taylor Swift song data",
   "main": "index.js",
   "scripts": {
-    "prod": "node index.js",
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "debug": "nodemon --inspect index.js",
     "test": "jest --coverage",
