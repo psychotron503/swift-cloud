@@ -1,0 +1,27 @@
+{
+  "name": "screen-cloud-backend-challenge",
+  "version": "1.0.0",
+  "description": "This application exposes a REST API to retrieve Taylor Swift song data",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node index.js",
+    "dev": "nodemon index.js",
+    "debug": "nodemon --inspect index.js",
+    "test": "jest --coverage",
+    "lint": "eslint ./src"
+  },
+  "keywords": [],
+  "author": "David Stewart",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.12.0",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "express": "^4.17.1",
+    "jest": "^26.6.1",
+    "swagger-jsdoc": "^4.3.1",
+    "swagger-ui-express": "^4.1.4"
+  }
+}

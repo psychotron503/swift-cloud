@@ -1,0 +1,976 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "screen-cloud-backend-challenge",
+    "description": "This application exposes a REST API to retrieve Taylor Swift song data",
+    "version": "1.0.0"
+  },
+  "basePath": "/catalog",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1": {
+      "get": {
+        "description": "View details about the available API endpoints",
+        "tags": [
+          "endpoints"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Shows available endpoints.",
+            "schema": {
+              "$ref": "#/definitions/availableEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/albums/{album}": {
+      "get": {
+        "description": "Get a single Taylor Swift album",
+        "tags": [
+          "album"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Shows an album in endpoint response",
+            "schema": {
+              "$ref": "#/definitions/albumEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/albums": {
+      "get": {
+        "description": "Get all Taylor Swift album data",
+        "tags": [
+          "albums"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "description": "Query using MongoDB like query syntax. The following examples can be added to ?q=\n\n\nTo get all albums written in 2019 - {\"year\": {\"$eq\": 2019}} \n\nTo get all albums written before 2019 - {\"year\": {\"$lt\": 2019}} \n\nTo get all albums written after 2019 - {\"year\": {\"$gt\": 2019}} \n\nTo get all albums written in or before 2019 - {\"year\": {\"$lte\": 2019}} \n\nTo get all albums written in or after 2019 - {\"year\": {\"$gte\": 2019}} \n\nTo get all albums written between 2015 and 2018 - {\"year\": {\"$bt\": [2015, 2018]}}",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "description": "Sort the albums by a particular field name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "limit the number albums to be retrieved",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shows all albums endpoint response",
+            "schema": {
+              "$ref": "#/definitions/albumsEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/songs/{song}": {
+      "get": {
+        "description": "Get a single Taylor Swift song",
+        "tags": [
+          "song"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Shows a song in endpoint response",
+            "schema": {
+              "$ref": "#/definitions/songEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/songs": {
+      "get": {
+        "description": "Get all Taylor Swift song data",
+        "tags": [
+          "songs"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "description": "Query using MongoDB like query syntax. The following examples can be added to ?q=\n\n\nTo get all songs written in 2019 - {\"year\": {\"$eq\": 2019}} \n\nTo get all songs written before 2019 - {\"year\": {\"$lt\": 2019}} \n\nTo get all songs written after 2019 - {\"year\": {\"$gt\": 2019}} \n\nTo get all songs written in or before 2019 - {\"year\": {\"$lte\": 2019}} \n\nTo get all songs written in or after 2019 - {\"year\": {\"$gte\": 2019}} \n\nTo get all songs written between 2015 and 2018 - {\"year\": {\"$bt\": [2015, 2018]}}",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "description": "Sort the songs by a particular field name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "limit the number songs to be retrieved",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shows all songs endpoint response",
+            "schema": {
+              "$ref": "#/definitions/songsEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/artists/{artist}": {
+      "get": {
+        "description": "Get a single artist who wrote a Taylor Swift song",
+        "tags": [
+          "artist"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "limit the number artists to be retrieved",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shows an artist in endpoint response",
+            "schema": {
+              "$ref": "#/definitions/artistEndpointsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/artists": {
+      "get": {
+        "description": "Get all Taylor Swift artist data",
+        "tags": [
+          "artists"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Shows all artists endpoint response",
+            "schema": {
+              "$ref": "#/definitions/artistsEndpointResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "availableEndpointsResponse": {
+      "example": {
+        "endpoints": {
+          "getAllSongs": "<server>:<port>/catalog/v1/songs",
+          "getSingleSong": "<server>:<port>/catalog/v1/songs/{song}",
+          "getAllAlbums": "<server>:<port>/catalog/v1/albums",
+          "getSingleAlbum": "<server>:<port>/catalog/v1/albums/{album}",
+          "getAllArtists": "<server>:<port>/catalog/v1/artists",
+          "getSingleArtist": "<server>:<port>/catalog/v1/artists/{artist}"
+        }
+      }
+    },
+    "artistsEndpointResponse": {
+      "properties": {
+        "artists": {
+          "type": "object",
+          "description": "All artists",
+          "properties": {
+            "additionalProperties": {
+              "type": "object",
+              "description": "An artist",
+              "properties": {
+                "artist": {
+                  "type": "string",
+                  "description": "The artist associated with this item"
+                },
+                "songs": {
+                  "type": "array",
+                  "description": "The names of the songs written by the artist",
+                  "items": {
+                    "type": "string",
+                    "description": "A song"
+                  }
+                },
+                "albums": {
+                  "type": "array",
+                  "description": "The names of the albums written by the artist",
+                  "items": {
+                    "type": "string",
+                    "description": "An album"
+                  }
+                },
+                "years": {
+                  "type": "array",
+                  "description": "The years that the artist wrote songs",
+                  "items": {
+                    "type": "string",
+                    "description": "A year"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "artists": {
+          "Taylor Swift": {
+            "artist": "Taylor Swift",
+            "albums": [
+              "Folklore",
+              "Red",
+              "Lover",
+              "1989 ",
+              "None[a]",
+              "Speak Now",
+              "None[b]",
+              "Beautiful Eyes",
+              "Cats: Highlights from the Motion Picture Soundtrack",
+              "Fearless",
+              "Speak Now World Tour – Live",
+              "Hope for Haiti Now",
+              "Reputation",
+              "AT&T Team USA Soundtrack and Fearless",
+              "Sounds of the Season",
+              "None",
+              "Taylor Swift",
+              "Red-(Deluxe edition)",
+              "Fearless-(Platinum edition)",
+              "Hannah Montana: The Movie",
+              "The Hunger Games",
+              "Speak Now-(Deluxe edition)",
+              "Taylor Swift-(Deluxe edition)",
+              "Fearless-(Platinum edition) and Valentine's Day: Soundtrack",
+              "Folklore-(Physical Edition)",
+              "None[e]",
+              "1989-(Deluxe edition)",
+              "Spotify Singles",
+              "One Chance Soundtrack",
+              "Valentine's Day[f]",
+              "iTunes Live from SoHo"
+            ],
+            "songs": [
+              "The 1",
+              "22 ",
+              "Afterglow",
+              "All Too Well",
+              "All You Had to Do Was Stay",
+              "American Girl (cover)",
+              "The Archer",
+              "August",
+              "Back to December",
+              "Bad Blood (album version)",
+              "Bad Blood (remixed single version)",
+              "Beautiful Eyes",
+              "Beautiful Ghosts",
+              "Begin Again",
+              "The Best Day",
+              "Bette Davis Eyes (live cover)",
+              "Better than Revenge",
+              "Betty",
+              "Blank Space",
+              "Breathe",
+              "Breathless (cover)",
+              "Call It What You Want",
+              "Cardigan",
+              "Change",
+              "Christmas Must Be Something More",
+              "Christmas Tree Farm",
+              "Christmases When You Were Mine",
+              "Clean",
+              "Cold as You",
+              "Come Back... Be Here",
+              "Come in with the Rain",
+              "Cornelia Street",
+              "Crazier",
+              "Cruel Summer",
+              "Dancing with Our Hands Tied",
+              "Daylight",
+              "Death by a Thousand Cuts",
+              "Dear John",
+              "Delicate",
+              "Don't Blame Me",
+              "Dress",
+              "Drops of Jupiter (live cover)",
+              "Enchanted",
+              "End Game",
+              "Epiphany",
+              "Everything Has Changed",
+              "Exile",
+              "Eyes Open",
+              "False God",
+              "Fearless",
+              "Fifteen",
+              "Forever & Always",
+              "Forever & Always (piano version)",
+              "Getaway Car",
+              "Girl at Home",
+              "Gorgeous",
+              "Haunted",
+              "Hey Stephen",
+              "Hoax",
+              "Holy Ground",
+              "How You Get the Girl",
+              "I Almost Do",
+              "I Did Something Bad",
+              "I Forgot That You Existed",
+              "I Heart ?",
+              "I Knew You Were Trouble",
+              "I Know Places",
+              "I Think He Knows",
+              "I Want You Back (live cover)",
+              "I Wish You Would",
+              "If This Was a Movie",
+              "Illicit Affairs",
+              "Innocent",
+              "Invisible",
+              "Invisible String",
+              "It's Nice to Have a Friend",
+              "I'd Lie",
+              "I'm Only Me When I'm with You",
+              "Jump Then Fall",
+              "King of My Heart",
+              "The Lakes",
+              "Last Christmas (cover)",
+              "The Last Great American Dynasty",
+              "Last Kiss",
+              "The Last Time",
+              "Long Live",
+              "Long Live (single version)",
+              "London Boy",
+              "Look What You Made Me Do",
+              "Love Story",
+              "Lover",
+              "Lover (Remix)",
+              "The Lucky One",
+              "Macavity (cover)",
+              "Mad Woman",
+              "The Man",
+              "Mary's Song (Oh My My My)",
+              "Me!",
+              "Mean",
+              "Mine",
+              "Mirrorball",
+              "Miss Americana & the Heartbreak Prince",
+              "The Moment I Knew",
+              "My Tears Ricochet",
+              "Never Grow Up",
+              "New Romantics",
+              "New Year's Day",
+              "Only the Young",
+              "The Other Side of the Door",
+              "Our Song",
+              "Ours",
+              "Out of the Woods",
+              "The Outside",
+              "Paper Rings",
+              "Peace",
+              "A Perfectly Good Heart",
+              "Picture to Burn",
+              "A Place in This World",
+              "...Ready for It?",
+              "Red",
+              "Ronan",
+              "Sad Beautiful Tragic",
+              "Safe & Sound",
+              "Santa Baby (cover)",
+              "September (cover)",
+              "Seven",
+              "Shake It Off",
+              "Should've Said No",
+              "Silent Night (cover)",
+              "So It Goes...",
+              "Soon You'll Get Better",
+              "Sparks Fly",
+              "Speak Now",
+              "Starlight",
+              "State of Grace",
+              "Stay Beautiful",
+              "Stay Stay Stay",
+              "The Story of Us",
+              "Style",
+              "Superman",
+              "Superstar",
+              "Sweeter than Fiction",
+              "Teardrops on My Guitar",
+              "Tell Me Why",
+              "This Is Me Trying",
+              "This Is Why We Can't Have Nice Things",
+              "This Love",
+              "Tied Together with a Smile",
+              "Tim McGraw",
+              "Today Was a Fairytale",
+              "Treacherous",
+              "Umbrella (live cover)",
+              "Untouchable",
+              "The Way I Loved You",
+              "We Are Never Ever Getting Back Together",
+              "Welcome to New York",
+              "White Christmas (cover)",
+              "White Horse",
+              "Wildest Dreams",
+              "Wonderland",
+              "You Are in Love",
+              "You Belong with Me",
+              "You Need to Calm Down",
+              "You're Not Sorry"
+            ],
+            "years": [
+              "2020",
+              "2012",
+              "2019",
+              "2014",
+              "2009",
+              "2010",
+              "2015",
+              "2008",
+              "2011",
+              "2017",
+              "2007",
+              "2006",
+              "2018",
+              "2013"
+            ]
+          },
+          "Sugarland": {
+            "artist": "Sugarland",
+            "albums": [
+              "Bigger"
+            ],
+            "songs": [
+              "Babe"
+            ],
+            "years": [
+              "2018"
+            ]
+          }
+        }
+      }
+    },
+    "songsEndpointsResponse": {
+      "properties": {
+        "songs": {
+          "type": "object",
+          "description": "All songs",
+          "properties": {
+            "additionalProperties": {
+              "type": "object",
+              "description": "A song",
+              "properties": {
+                "song": {
+                  "type": "string",
+                  "description": "The name of a song"
+                },
+                "album": {
+                  "type": "string",
+                  "description": "The name of the album that the song belongs to"
+                },
+                "writers": {
+                  "type": "array",
+                  "description": "The writers of the song",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "artists": {
+                  "type": "array",
+                  "description": "The artists of the song",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "year": {
+                  "type": "string",
+                  "description": "The year that the song was written"
+                },
+                "plays-june": {
+                  "type": "string",
+                  "description": "The number of time that the song was played in June"
+                },
+                "plays-july": {
+                  "type": "string",
+                  "description": "The number of time that the song was played in July"
+                },
+                "plays-august": {
+                  "type": "string",
+                  "description": "The number of time that the song was played in August"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "songs": {
+          "The 1": {
+            "song": "The 1",
+            "album": "Folklore",
+            "writers": [
+              "Taylor Swift",
+              "Aaron Dessner"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2020",
+            "plays_june": "68",
+            "plays_july": "6",
+            "plays_august": "61"
+          },
+          "August": {
+            "song": "August",
+            "album": "Folklore",
+            "writers": [
+              "Taylor Swift",
+              "Jack Antonoff"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2020",
+            "plays_june": "10",
+            "plays_july": "40",
+            "plays_august": "26"
+          },
+          "Betty": {
+            "song": "Betty",
+            "album": "Folklore",
+            "writers": [
+              "Taylor Swift",
+              "William Bowery"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2020",
+            "plays_june": "73",
+            "plays_july": "54",
+            "plays_august": "78"
+          },
+          "Cardigan": {
+            "song": "Cardigan",
+            "album": "Folklore",
+            "writers": [
+              "Taylor Swift",
+              "Aaron Dessner"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2020",
+            "plays_june": "84",
+            "plays_july": "64",
+            "plays_august": "59"
+          },
+          "Epiphany": {
+            "song": "Epiphany",
+            "album": "Folklore",
+            "writers": [
+              "Taylor Swift",
+              "Aaron Dessner"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2020",
+            "plays_june": "44",
+            "plays_july": "110",
+            "plays_august": "29"
+          }
+        }
+      }
+    },
+    "albumEndpointsResponse": {
+      "properties": {
+        "album": {
+          "type": "string",
+          "description": "The album associated with this item"
+        },
+        "songs": {
+          "description": "All of the songs associated with this album",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The name of a song"
+          }
+        },
+        "writers": {
+          "type": "array",
+          "description": "All of the writers associated with this album",
+          "items": {
+            "type": "string",
+            "description": "The name of a writer"
+          }
+        },
+        "artists": {
+          "type": "array",
+          "description": "All of the artists associated with this album",
+          "items": {
+            "type": "string",
+            "description": "The name of an artist"
+          }
+        },
+        "year": {
+          "type": "string",
+          "description": "The year this album was released"
+        }
+      },
+      "example": {
+        "album": "Bigger",
+        "songs": [
+            "Babe"
+        ],
+        "writers": [
+            "Taylor Swift",
+            "Patrick Monahan"
+        ],
+        "artists": [
+            "Sugarland",
+            "featuring Taylor Swift"
+        ],
+        "year": "2018"
+    }
+    },
+    "songEndpointsResponse": {
+      "properties": {
+        "song": {
+          "type": "string",
+          "description": "The song associated with this item"
+        },
+        "album": {
+          "type": "string",
+          "description": "The album associated with this item"
+        },
+        "writers": {
+          "type": "array",
+          "description": "All of the writers associated with this song",
+          "items": {
+            "type": "string",
+            "description": "The name of a writer"
+          }
+        },
+        "artists": {
+          "type": "array",
+          "description": "All of the artists associated with this song",
+          "items": {
+            "type": "string",
+            "description": "The name of an artist"
+          }
+        },
+        "year": {
+          "type": "string",
+          "description": "The year this song was released"
+        },
+        "plays-june": {
+          "type": "string",
+          "description": "The number of time that the song was played in June"
+        },
+        "plays-july": {
+          "type": "string",
+          "description": "The number of time that the song was played in July"
+        },
+        "plays-august": {
+          "type": "string",
+          "description": "The number of time that the song was played in August"
+        }
+      },
+      "example": {
+        "song": "Babe",
+        "album": "Bigger",
+        "writers": [
+            "Taylor Swift",
+            "Patrick Monahan"
+        ],
+        "artists": [
+            "Sugarland",
+            "featuring Taylor Swift"
+        ],
+        "year": "2018",
+        "plays_june": "19",
+        "plays_july": "22",
+        "plays_august": "7"
+    }
+    },
+    "artistEndpointsResponse": {
+      "properties": {
+        "artist": {
+          "type": "string",
+          "description": "The artist associated with this item"
+        },
+        "songs": {
+          "description": "All of the songs associated with this artist",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The name of a song"
+          }
+        },
+        "albums": {
+          "description": "All of the albums associated with this artist",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The name of an album"
+          }
+        },
+        "years": {
+          "description": "All of the years this artist wrote songs",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A year"
+          }
+        }
+      },
+      "example": {
+        "artist": "Sugarland",
+        "albums": [
+            "Bigger"
+        ],
+        "songs": [
+            "Babe"
+        ],
+        "years": [
+            "2018"
+        ]
+      }
+    },
+    "albumsEndpointsResponse": {
+      "properties": {
+        "albums": {
+          "type": "object",
+          "description": "All albums",
+          "properties": {
+            "additionalProperties": {
+              "type": "object",
+              "description": "An album",
+              "properties": {
+                "songs": {
+                  "description": "All of the songs associated with this album",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "The name of a song"
+                  }
+                },
+                "writers": {
+                  "type": "array",
+                  "description": "All of the writers associated with this album",
+                  "items": {
+                    "type": "string",
+                    "description": "The name of a writer"
+                  }
+                },
+                "artists": {
+                  "type": "array",
+                  "description": "All of the artists associated with this album",
+                  "items": {
+                    "type": "string",
+                    "description": "The name of an artist"
+                  }
+                },
+                "year": {
+                  "type": "string",
+                  "description": "The year this album was released"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "albums": {
+          "Folklore": {
+            "songs": [
+              "The 1",
+              "August",
+              "Betty",
+              "Cardigan",
+              "Epiphany",
+              "Exile",
+              "Hoax",
+              "Illicit Affairs",
+              "Invisible String",
+              "The Last Great American Dynasty",
+              "Mad Woman",
+              "Mirrorball",
+              "My Tears Ricochet",
+              "Peace",
+              "Seven",
+              "This Is Me Trying"
+            ],
+            "writers": [
+              "Taylor Swift",
+              "Jack Antonoff",
+              "Aaron Dessner",
+              "Justin Vernon",
+              "William Bowery"
+            ],
+            "artists": [
+              "Taylor Swift",
+              "featuring Bon Iver"
+            ],
+            "year": "2020"
+          },
+          "Red": {
+            "songs": [
+              "22 ",
+              "All Too Well",
+              "Begin Again",
+              "Everything Has Changed",
+              "Holy Ground",
+              "I Almost Do",
+              "I Knew You Were Trouble",
+              "The Last Time",
+              "The Lucky One",
+              "Red",
+              "Sad Beautiful Tragic",
+              "Starlight",
+              "State of Grace",
+              "Stay Stay Stay",
+              "Treacherous",
+              "We Are Never Ever Getting Back Together"
+            ],
+            "writers": [
+              "Taylor Swift",
+              "Max Martin",
+              "Shellback",
+              "Dan Wilson",
+              "Gary Lightbody",
+              "Jacknife Lee",
+              "Ed Sheeran",
+              "Liz Rose"
+            ],
+            "artists": [
+              "Taylor Swift",
+              "featuring Gary Lightbody of Snow Patrol",
+              "featuring Ed Sheeran"
+            ],
+            "year": "2012"
+          },
+          "Lover": {
+            "songs": [
+              "Afterglow",
+              "The Archer",
+              "Cornelia Street",
+              "Cruel Summer",
+              "Daylight",
+              "Death by a Thousand Cuts",
+              "False God",
+              "I Forgot That You Existed",
+              "I Think He Knows",
+              "It's Nice to Have a Friend",
+              "London Boy",
+              "Lover",
+              "The Man",
+              "Me!",
+              "Miss Americana & the Heartbreak Prince",
+              "Paper Rings",
+              "Soon You'll Get Better",
+              "You Need to Calm Down"
+            ],
+            "writers": [
+              "Taylor Swift",
+              "Joel Little",
+              "Jack Antonoff",
+              "Brendon Urie",
+              "Cautious Clay",
+              "Sounwave",
+              "Louis Bell",
+              "Frank Dukes",
+              "St. Vincent"
+            ],
+            "artists": [
+              "Taylor Swift",
+              "featuring Dixie Chicks",
+              "featuring Brendon Urie of Panic! at the Disco"
+            ],
+            "year": "2019"
+          },
+          "1989 ": {
+            "songs": [
+              "All You Had to Do Was Stay",
+              "Bad Blood (album version)",
+              "Blank Space",
+              "Clean",
+              "How You Get the Girl",
+              "I Know Places",
+              "I Wish You Would",
+              "Out of the Woods",
+              "Shake It Off",
+              "Style",
+              "This Love",
+              "Welcome to New York",
+              "Wildest Dreams"
+            ],
+            "writers": [
+              "Taylor Swift",
+              "Max Martin",
+              "Shellback",
+              "Ryan Tedder",
+              "Ali Payami",
+              "Jack Antonoff",
+              "Imogen Heap"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2014"
+          },
+          "None[a]": {
+            "songs": [
+              "American Girl (cover)"
+            ],
+            "writers": [
+              "Tom Petty"
+            ],
+            "artists": [
+              "Taylor Swift"
+            ],
+            "year": "2009"
+          },
+          "Bigger": {
+            "songs": [
+              "Babe"
+            ],
+            "writers": [
+              "Taylor Swift",
+              "Patrick Monahan"
+            ],
+            "artists": [
+              "Sugarland",
+              "featuring Taylor Swift"
+            ],
+            "year": "2018"
+          }
+        }
+      }
+    }
+  }
+}
