@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const process = require('process'); 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJson = require('./api-docs/swagger.json');
 const catalogRouter = require('./routes/catalog');
@@ -15,6 +16,8 @@ app.use(express.urlencoded({
 
 app.use('/catalog', catalogRouter);
 
-const server = app.listen(5000, () => {
+const PORT = process.env.port || 5000;
+
+const server = app.listen(PORT, () => {
   console.log(`Server started on port ${server.address().port}`);
 });
