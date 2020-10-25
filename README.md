@@ -4,7 +4,7 @@
 # Running the Application
  - The package.json file contains several scripts to run the application:
 
-   * To run a production build - 'npm run prod'.
+   * To run a production build - 'npm run start'.
    * To run a development build - 'npm run dev'.
    * To run a development build with --inspect flag for debugging - 'npm run debug'.
    * To run all unit tests with code coverage - 'npm run test'.
@@ -15,20 +15,20 @@ The following requests can be sent to invoke the API.
 
 ## Endpoints
 
-* (GET) http://<server>:<port>/catalog/v1/albums
+* (GET) /catalog/v1/albums
   - Retrieve all albums.
-* (GET) http://<server>:<port>/catalog/v1/albums/{album-name}
+* (GET) /catalog/v1/albums/{album-name}
   - Retrieve a single album by name.
-* (GET) http://<server>:<port>/catalog/v1/songs
+* (GET) /catalog/v1/songs
   - Retrieve all songs.
-* (GET) http://<server>:<port>/catalog/v1/songs/{song-name}
+* (GET) /catalog/v1/songs/{song-name}
   - Retrieve a single song by name.
-* (GET) http://<server>:<port>/catalog/v1/artists
+* (GET) /catalog/v1/artists
   - Retrieve all artists.
-* (GET) http://<server>:<port>/catalog/v1/artists/{artist-name}
+* (GET) /catalog/v1/artists/{artist-name}
   - Retrieve a single song by name.
 
-* http://<server>:<port>/api-docs
+* http://localhost:5000/api-docs
   - Open this in browser to view swagger documentation.
 
 ## Parameters
@@ -78,7 +78,7 @@ The albums and songs can have a limit on results to return:
 
   * Update root catalog endpoint to retrieve data from all endpoints e.g.:
 
-    (GET) http://<server>:<port>/catalog/v1/
+    (GET) /catalog/v1/
     
     response:
     {
