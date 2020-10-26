@@ -111,7 +111,7 @@
             "in": "query",
             "name": "q",
             "required": false,
-            "description": "Query using MongoDB like query syntax. The following examples can be added to ?q=\n\n\nTo get all songs written in 2019 - {\"year\": {\"$eq\": 2019}} \n\nTo get all songs written before 2019 - {\"year\": {\"$lt\": 2019}} \n\nTo get all songs written after 2019 - {\"year\": {\"$gt\": 2019}} \n\nTo get all songs written in or before 2019 - {\"year\": {\"$lte\": 2019}} \n\nTo get all songs written in or after 2019 - {\"year\": {\"$gte\": 2019}} \n\nTo get all songs written between 2015 and 2018 - {\"year\": {\"$bt\": [2015, 2018]}}",
+            "description": "Query using MongoDB like query syntax. The following examples can be added to ?q=\n\n\nTo get all songs written in 2019 - {\"year\": {\"$eq\": 2019}} \n\nTo get all songs written before 2019 - {\"year\": {\"$lt\": 2019}} \n\nTo get all songs written after 2019 - {\"year\": {\"$gt\": 2019}} \n\nTo get all songs written in or before 2019 - {\"year\": {\"$lte\": 2019}} \n\nTo get all songs written in or after 2019 - {\"year\": {\"$gte\": 2019}} \n\nTo get all songs written between 2015 and 2018 - {\"year\": {\"$bt\": [2015, 2018]}} \n\nTo get all songs in August that have between 102 and 103 plays and sorted in descending order - {\"plays_august\": {\"$bt\": [101, 102]}}&sort=plays_august:desc",
             "type": "string"
           },
           {

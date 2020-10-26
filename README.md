@@ -2,13 +2,29 @@
  - Run 'npm install' in root of application.
 
 # Running the Application
- - The package.json file contains several scripts to run the application:
 
-   * To run a production build - 'npm run start'.
-   * To run a development build - 'npm run dev'.
-   * To run a development build with --inspect flag for debugging - 'npm run debug'.
-   * To run all unit tests with code coverage - 'npm run test'.
-   * To run eslint on all code in src directory - 'npm run lint'.
+## To run locally
+The package.json file contains several scripts to run the application:
+
+  * To run a production build - 'npm run start'.
+  * To run a development build - 'npm run dev'.
+  * To run a development build with --inspect flag for debugging - 'npm run debug'.
+  * To run all unit tests with code coverage - 'npm run test'.
+  * To run eslint on all code in src directory - 'npm run lint'.
+
+## Deployed application
+The application has also been deployed to AWS at:
+
+  - http://swiftcloud-env.eba-72jhinpm.us-west-2.elasticbeanstalk.com
+
+For example, to view the swagger documentation, open the following URL in a browser:
+
+  - http://swiftcloud-env.eba-72jhinpm.us-west-2.elasticbeanstalk.com/api-docs
+
+To retrieve the 5 most listened songs in August:
+
+ - (GET) http://swiftcloud-env.eba-72jhinpm.us-west-2.elasticbeanstalk.com/catalog/v1/songs?sort=plays_august:desc&limit=5
+
 
 # Invoking the API
 The following requests can be sent to invoke the API.
@@ -95,6 +111,8 @@ The albums and songs can have a limit on results to return:
   * Build out the querying utility to be more flexible e.g. including &and/$or etc.
 
   * Add pagination controls.
+
+  * Add 'links' array to the responses. For example, include 'rel' links for all songs in an album response.
 
   * Add unit tests to all cover whole application. Currently only 'utils' module has tests.
 
